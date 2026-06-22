@@ -1,12 +1,41 @@
 <%layout("/layouts/boilerplate")%>
-<body>
-    <h3>All Listings</h3>
-    <form method = "GET" action = "/listings/new" >
-        <button>Create New List</button>
+
+<div class="container-fluid px-5 py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold mb-0">All Listings</h3>
+    <form method="GET" action="/listings/new">
+      <button class="btn-create-listing">+ Create New List</button>
     </form>
-    <% for(listing of allListings){ %>
-        <ul>
-            <li><a href = "/listings/<%=listing._id%>"><%=listing.title%></a></li>
-        </ul>
-    <% } %>
-</body>
+  </div>
+
+  <div class="listings-grid">
+  <% for(let listing of allListings) { %>
+    <div >
+      <a href="/listings/<%= listing._id %>" class="listing-card-link">
+        <div class="card listing-card h-100 border-0">
+          <img
+            src="<%= listing.image.url %>"
+            class="card-img-top listing-img"
+            alt="<%= listing.title %>"
+          >
+
+          <div class="card-body px-1">
+            <h5 class="listing-title mb-1">
+              <%= listing.title %>
+            </h5>
+
+            <p class="listing-location text-muted mb-1">
+              <%= listing.location %>, <%= listing.country %>
+            </p>
+
+            <p class="listing-price mb-0">
+              &#8377;<%= listing.price.toLocaleString("en-IN") %>
+              <span class="text-muted">/ night</span>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
+</div>
