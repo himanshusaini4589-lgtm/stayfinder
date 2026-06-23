@@ -9,77 +9,71 @@
                     Create New Listing
                 </h2>
 
-                <form method="POST" action="/listings">
+                <form method="POST" action="/listings" novalidate class="needs-validation">
+  
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="listing[title]" id="title" class="form-control" required minlength="3">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Title must be at least 3 characters.</div>
+                </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Title</label>
-                        <input
-                            name="Listing[title]"
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter title"
-                        >
-                    </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description" class="form-control" required></textarea>
+                    <div class="valid-feedback">Nice, that's a solid description.</div>
+                    <div class="invalid-feedback">Please write a description.</div>
+                </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea
-                            name="Listing[description]"
-                            rows="4"
-                            class="form-control"
-                            placeholder="Enter description"
-                        ></textarea>
-                    </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input type="url" name="listing[image][url]" id="image" class="form-control"
+                        pattern="https?://.+" placeholder="https://..." required>
+                    <div class="valid-feedback">Valid URL!</div>
+                    <div class="invalid-feedback">Enter a valid URL starting with http:// or https://</div>
+                </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Image URL</label>
-                        <input
-                            name="Listing[image]"
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter image URL"
-                        >
-                    </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" name="listing[price]" id="price" class="form-control" required min="0">
+                    <div class="valid-feedback">Price looks valid.</div>
+                    <div class="invalid-feedback">Price can't be negative.</div>
+                </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Price</label>
-                        <input
-                            name="Listing[price]"
-                            type="number"
-                            class="form-control"
-                            placeholder="Enter price"
-                        >
-                    </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="listing[country]" id="country" class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Country is required.</div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Country</label>
-                            <input
-                                name="Listing[country]"
-                                type="text"
-                                class="form-control"
-                                placeholder="Enter country"
-                            >
-                        </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" name="listing[location]" id="location" class="form-control" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Location is required.</div>
+                </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Location</label>
-                            <input
-                                name="Listing[location]"
-                                type="text"
-                                class="form-control"
-                                placeholder="Enter location"
-                            >
-                        </div>
-                    </div>
-
-                    <button class="btn btn-danger w-100 rounded-pill">
-                        Add Listing
-                    </button>
-
+                <button class="btn btn-dark" type="submit">Add</button>
                 </form>
             </div>
 
         </div>
     </div>
 </div>
+
+<script>
+  // Bootstrap's official pattern for triggering :invalid styles on submit attempt
+  (() => {
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
