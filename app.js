@@ -43,11 +43,15 @@ app.get("/listings/new",async (req,res)=>{
     res.render("listings/new.ejs",); 
 });
 
-app.post("/listings",async (req,res)=>{
+app.post("/listings",async (req,res,next)=>{
     //let {title ,description ,image,price,country,location} = req.body;
-    const newListing = new Listing(req.body.Listing);
-    await newListing.save();
-    res.redirect("/listings");
+    try{
+        const newListing = new Listing(req.body.Listing);
+        await newListing.save();
+        res.redirect("/listings");
+    } catch(err){
+        next(err);
+    }
 });
 
 
@@ -77,6 +81,10 @@ app.delete("/listings/:id",async (req,res)=>{
     let deleteListing = await Listing.findByIdAndDelete(id);
     console.log(deleteListing);
     res.redirect("/listings");
+})
+
+app.use((err,req,res,next) =>{
+    res.send("something went wrong");
 })
 
  app.listen(port,()=>{
