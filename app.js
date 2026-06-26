@@ -8,9 +8,9 @@
  const wrapAsync = require("./utils/wrapAsync.js");
  const ExpressError = require("./utils/ExpressError.js")
  const { listingSchema } = require("./schema.js");
-const port = 8080;
-
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+ const port = 8080;
+ const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
+ const Review = require("./models/review.js");
 
 main()
 .then(()=>{
@@ -99,6 +99,22 @@ app.delete("/listings/:id",wrapAsync(async (req,res)=>{
     console.log(deleteListing);
     res.redirect("/listings");
 }));
+
+//post Reviews
+app.post("/listings/:id/reviews",wrapAsync(async (req,res)=>{
+    console.log(req.body);
+
+    console.log(req.body.review);
+    let {id} = req.params;
+   
+    const review = new Review(req.body.review);
+    const listing = await Listing.findById(id);
+    listing.reviews.push(review);
+    await review.save();
+    await listing.save();
+    res.redirect(`/listings/${id}`);
+}));
+
 
 app.all("/*splat",(req,res,next)=>{
     
