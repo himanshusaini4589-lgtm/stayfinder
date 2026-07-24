@@ -14,7 +14,7 @@
                 <div class="mb-3">
                     <label class="form-label">Title</label>
                     <input
-                        name="Listing[title]"
+                        name="listing[title]"
                         type="text"
                         class="form-control"
                         value="<%= listing.title %>"
@@ -24,7 +24,7 @@
                 <div class="mb-3">
                     <label class="form-label">Description</label>
                     <textarea
-                        name="Listing[description]"
+                        name="listing[description]"
                         rows="4"
                         class="form-control"
                     ><%= listing.description %></textarea>
@@ -33,17 +33,17 @@
                 <div class="mb-3">
                     <label class="form-label">Image URL</label>
                     <input
-                        name="Listing[image]"
+                        name="listing[image][url]"
                         type="text"
                         class="form-control"
-                        value="<%= listing.image %>"
+                        value="<%= listing.image.url %>"
                     >
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Price</label>
                     <input
-                        name="Listing[price]"
+                        name="listing[price]"
                         type="number"
                         class="form-control"
                         value="<%= listing.price %>"
@@ -54,7 +54,7 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Country</label>
                         <input
-                            name="Listing[country]"
+                            name="listing[country]"
                             type="text"
                             class="form-control"
                             value="<%= listing.country %>"
@@ -64,7 +64,7 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Location</label>
                         <input
-                            name="Listing[location]"
+                            name="listing[location]"
                             type="text"
                             class="form-control"
                             value="<%= listing.location %>"

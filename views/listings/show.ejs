@@ -74,7 +74,41 @@
             <button type="submit" class="btn btn-dark rounded-pill px-4">Submit</button>
         </form>
 
+</div>
+    
+    <hr class="my-5">
+
+    <h3 class="fw-bold mb-4">All Reviews</h3>
+
+    <div class="row">
+        <% if(listing.reviews.length){ %>
+
+            <% listing.reviews.forEach(review => { %>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                Rating: <%= review.rating %> ⭐
+                            </h5>
+
+                            <p class="card-text">
+                                <%= review.comment %>
+                            </p>
+                            <form method = "POST" action = "/listings/<%= listing._id %>/reviews/<%=review._id%>?_method=DELETE">
+                                <button class = "btn btn-sm btn-dark rounded-pill px-4">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+
+        <% } else { %>
+            <p class="text-muted">No reviews yet.</p>
+        <% } %>
     </div>
 </div>
 
 </div>
+ 
