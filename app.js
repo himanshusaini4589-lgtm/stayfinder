@@ -74,6 +74,7 @@ app.get("/listings/:id/edit",wrapAsync(async (req,res)=>{
     res.render("listings/edit.ejs",{listing});
 }));
 
+app.get
 app.put("/listings/:id",validateListing,wrapAsync(async (req,res)=>{
     let {id} = req.params;
     await Listing.findByIdAndUpdate(id,{...req.body.Listing});
