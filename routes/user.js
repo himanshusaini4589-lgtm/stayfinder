@@ -1,22 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-
 const User = require("../models/user");
 
-// Render Signup Form
+// Signup Form
 router.get("/signup", (req, res) => {
-    res.render("users/signup.ejs");
+    res.render("users/signup");
 });
 
 // Signup
 router.post("/signup", async (req, res, next) => {
     try {
-        let { username, email, password } = req.body;
+        const { username, email, password } = req.body;
 
         const newUser = new User({
-            email,
             username,
+            email,
         });
 
         const registeredUser = await User.register(newUser, password);
@@ -34,9 +33,9 @@ router.post("/signup", async (req, res, next) => {
     }
 });
 
-// Render Login Form
+// Login Form
 router.get("/login", (req, res) => {
-    res.render("users/login.ejs");
+    res.render("users/login");
 });
 
 // Login
@@ -47,7 +46,7 @@ router.post(
         failureFlash: true,
     }),
     (req, res) => {
-        req.flash("success", "Welcome Back!");
+        req.flash("success", "Welcome back!");
         res.redirect("/listings");
     }
 );
@@ -57,7 +56,7 @@ router.get("/logout", (req, res, next) => {
     req.logout((err) => {
         if (err) return next(err);
 
-        req.flash("success", "Logged Out Successfully!");
+        req.flash("success", "Logged out successfully!");
         res.redirect("/listings");
     });
 });
