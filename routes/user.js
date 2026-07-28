@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user");
+const { saveRedirect } = require("../middleware");
 
 // Signup Form
 router.get("/signup", (req, res) => {
@@ -9,7 +10,7 @@ router.get("/signup", (req, res) => {
 });
 
 // Signup
-router.post("/signup", async (req, res, next) => {
+router.post("/signup", saveRedirect,async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
 
@@ -41,13 +42,19 @@ router.get("/login", (req, res) => {
 // Login
 router.post(
     "/login",
+    saveRedirect,
     passport.authenticate("local", {
         failureRedirect: "/login",
         failureFlash: true,
     }),
     (req, res) => {
         req.flash("success", "Welcome back!");
-        res.redirect("/listings");
+
+        const redirectUrl = res.locals.redirectUrl || "/listings";
+
+        delete req.session.redirectUrl;
+
+        res.redirect(redirectUrl);
     }
 );
 

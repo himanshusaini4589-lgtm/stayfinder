@@ -1,5 +1,7 @@
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
+        console.log("Saving:", req.originalUrl);
+        req.session.redirectUrl = req.originalUrl;
         req.flash("error", "You must be logged in to create a listing!");
         return res.redirect("/login");
     }
@@ -34,3 +36,10 @@ module.exports.validateListing = (req,res,next)=>{
 
     next();
 }
+module.exports.saveRedirect = (req, res, next) => {
+    if (req.session.redirectUrl) {
+        console.log("Session:", req.session.redirectUrl);
+        res.locals.redirectUrl = req.session.redirectUrl;
+    }
+    next();
+};

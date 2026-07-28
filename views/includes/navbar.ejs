@@ -42,10 +42,14 @@
             <i class="fa-solid fa-circle-user fs-4"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
-            <li><a class="dropdown-item" href="/signup">Sign up</a></li>
-            <li><a class="dropdown-item" href="/login">Log in</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/listings/new">Host your home</a></li>
+            <%if(!currUser){ %>
+              <li><a class="dropdown-item" href="/signup">Signup</a></li>
+              <li><a class="dropdown-item" href="/login">Login</a></li>
+            <%}  else {%>
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              <li><a class="dropdown-item" href="/listings/new">Host your home</a></li>
+            <%} %>
+            
           </ul>
         </li>
       </ul>
