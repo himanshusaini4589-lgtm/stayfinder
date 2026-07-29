@@ -51,7 +51,7 @@ router.post(
         req.flash("success", "Welcome back!");
 
         const redirectUrl = res.locals.redirectUrl || "/listings";
-
+        console.log("Redirect URL:", redirectUrl);
         delete req.session.redirectUrl;
 
         res.redirect(redirectUrl);

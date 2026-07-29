@@ -1,3 +1,8 @@
+const { listingSchema ,  reviewSchema  } = require("./schema.js");
+const ExpressError = require("./utils/ExpressError.js")
+const Listing = require("./models/listing.js");
+const Review = require("./models/review.js");
+
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
         console.log("Saving:", req.originalUrl);
@@ -43,3 +48,25 @@ module.exports.saveRedirect = (req, res, next) => {
     }
     next();
 };
+
+
+module.exports.isOwner = async (req,res,next) => {
+    let {id} = req.params;
+    let listing =  await Listing.findById(id);
+    if(!listing.owner.equals(res.locals.currUser._id)){
+        req.flash("error","you don't have permission to edit");
+        return res.redirect(`/listings/${id}`);
+    }
+    next();
+}
+
+
+module.exports.isReviewAuthor = async (req,res,next) => {
+    let {id , reviewId} = req.params;
+    let review =  await Review.findById(reviewId);
+    if(!review.author.equals(res.locals.currUser._id)){
+        req.flash("error","you don't have permission to edit");
+        return res.redirect(`/listings/${id}`);
+    }
+    next();
+}
