@@ -5,12 +5,12 @@ const ExpressError = require("../utils/ExpressError.js")
 const {  reviewSchema } = require("../schema.js");
 
 const { isLoggedIn , validateReview,isReviewAuthor} = require("../middleware");
-const reviewcontroller = require("../controllers/review");
+const reviewController = require("../controllers/review");
 
-//post Reviews
-router.post("/",isLoggedIn , validateReview, wrapAsync(reviewcontroller.postReview));
+//post Reviews Route
+router.post("/",isLoggedIn , validateReview, wrapAsync(reviewController.postReview));
 
 //Delete Review Route
-router.delete("/:reviewId",isLoggedIn,isReviewAuthor ,wrapAsync(reviewcontroller.destroyRoute));
+router.delete("/:reviewId",isLoggedIn,isReviewAuthor ,wrapAsync(reviewController.destroyRoute));
 
 module.exports = router;
