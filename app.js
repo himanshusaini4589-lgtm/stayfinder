@@ -1,4 +1,8 @@
- const express = require("express");
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
+
+const express = require("express");
  const app = express();
  const path = require("path");
  const mongoose = require("mongoose");
@@ -20,17 +24,16 @@
  const LocalStrategy = require("passport-local");
 
 
-main()
-.then(()=>{
-    console.log("connection to DB");
-})
-.catch((err)=>{
-    console.log(err);
-});
+const dbUrl = process.env.ATLASDB_URL;
 
-async function main(){
-    await mongoose.connect(MONGO_URL);
-}
+mongoose
+  .connect(dbUrl)
+  .then(() => {
+    console.log("Connected to MongoDB Atlas");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));

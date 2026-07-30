@@ -19,14 +19,8 @@ const listingSchema = new Schema({
         required: true
     },
     image: {
-        url: {
-            type: String,
-            default: "https://images.unsplash.com/photo-1769921546096-...",
-        },
-        filename: {
-            type: String,
-            default: "listingimage",
-        },
+        url: String,
+        filename: String,
     },
     country: {
         type: String,

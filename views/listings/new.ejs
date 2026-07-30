@@ -9,7 +9,7 @@
                     Create New Listing
                 </h2>
 
-                <form method="POST" action="/listings" novalidate class="needs-validation">
+                <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
   
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -27,8 +27,8 @@
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Image URL</label>
-                    <input type="url" name="listing[image][url]" id="image" class="form-control"
-                        pattern="https?://.+" placeholder="https://..." required>
+                    <input type="file" name="listing[image]" id="image" class="form-control">
+            
                     <div class="valid-feedback">Valid URL!</div>
                     <div class="invalid-feedback">Enter a valid URL starting with http:// or https://</div>
                 </div>
