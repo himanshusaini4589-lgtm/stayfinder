@@ -203,3 +203,11 @@
 .card{
     border-radius:18px;
 }
+
+
+/* map implementation */
+
+#map {
+    height: 400px;
+    width: 80vh;
+}

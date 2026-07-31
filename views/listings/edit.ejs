@@ -9,7 +9,7 @@
                 Edit Listing
             </h2>
 
-            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needsvalidation" enctype="multipart/form-data" >
 
                 <div class="mb-3">
                     <label class="form-label">Title</label>
@@ -31,12 +31,18 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Image URL</label>
+                    <label >Original Image</label>
+                    <br>
+                    <br>
+                    <img src="<%=originalImageUrl%>">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Upload New Image</label>
                     <input
-                        name="listing[image][url]"
-                        type="text"
+                        name="listing[image]"
+                        type="file"
                         class="form-control"
-                        value="<%= listing.image.url %>"
                     >
                 </div>
 

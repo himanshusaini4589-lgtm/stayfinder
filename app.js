@@ -24,16 +24,17 @@ const express = require("express");
  const LocalStrategy = require("passport-local");
 
 
-const dbUrl = process.env.ATLASDB_URL;
-
-mongoose
-  .connect(dbUrl)
-  .then(() => {
-    console.log("Connected to MongoDB Atlas");
-  })
-  .catch((err) => {
+main()
+.then(()=>{
+    console.log("connection to DB");
+})
+.catch((err)=>{
     console.log(err);
-  });
+});
+
+async function main(){
+    await mongoose.connect(MONGO_URL);
+}
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
