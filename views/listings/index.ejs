@@ -1,14 +1,64 @@
 <%layout("/layouts/boilerplate")%>
 
 <div class="container-fluid px-5 py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold mb-0">All Listings</h3>
-    <form method="GET" action="/listings/new">
-      <button class="btn-create-listing">+ Create New List</button>
-    </form>
+  <div class="category-filter d-flex gap-4 mb-4 overflow-auto pb-2">
+      <a href="/listings" class="category-item <%= !category ? 'active' : '' %>">
+          <i class="fa-solid fa-fire"></i>
+          <span>All</span>
+      </a>
+      <a href="/listings?category=Trending" class="category-item <%= category === 'Trending' ? 'active' : '' %>">
+          <i class="fa-solid fa-fire"></i>
+          <span>Trending</span>
+      </a>
+      <a href="/listings?category=Rooms" class="category-item <%= category === 'Rooms' ? 'active' : '' %>">
+          <i class="fa-solid fa-bed"></i>
+          <span>Rooms</span>
+      </a>
+      <a href="/listings?category=Iconic Cities" class="category-item <%= category === 'Iconic Cities' ? 'active' : '' %>">
+          <i class="fa-solid fa-city"></i>
+          <span>Iconic Cities</span>
+      </a>
+      <a href="/listings?category=Beachfront" class="category-item <%= category === 'Beachfront' ? 'active' : '' %>">
+          <i class="fa-solid fa-umbrella-beach"></i>
+          <span>Beachfront</span>
+      </a>
+      <a href="/listings?category=Mountains" class="category-item <%= category === 'Mountains' ? 'active' : '' %>">
+          <i class="fa-solid fa-mountain"></i>
+          <span>Mountains</span>
+      </a>
+      <a href="/listings?category=Countryside" class="category-item <%= category === 'Countryside' ? 'active' : '' %>">
+          <i class="fa-solid fa-tree"></i>
+          <span>Countryside</span>
+      </a>
+      <a href="/listings?category=Islands" class="category-item <%= category === 'Islands' ? 'active' : '' %>">
+          <i class="fa-solid fa-water"></i>
+          <span>Islands</span>
+      </a>
+      <a href="/listings?category=Lakefront" class="category-item <%= category === 'Lakefront' ? 'active' : '' %>">
+          <i class="fa-solid fa-water"></i>
+          <span>Lakefront</span>
+      </a>
+      <a href="/listings?category=Castles" class="category-item <%= category === 'Castles' ? 'active' : '' %>">
+          <i class="fa-solid fa-chess-rook"></i>
+          <span>Castles</span>
+      </a>
   </div>
-
+      <% if (search) { %>
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <p class="mb-0 text-muted">
+          Showing results for "<strong><%= search %></strong>"
+        </p>
+        <a href="/listings" class="btn btn-sm btn-outline-dark rounded-pill">Clear</a>
+      </div>
+    <% } %>
   <div class="listings-grid">
+    <% if (allListings.length === 0) { %>
+      <div class="text-center py-5 w-100">
+        <i class="fa-solid fa-magnifying-glass fs-1 text-muted mb-3"></i>
+        <h5>No listings found</h5>
+        <p class="text-muted">Try a different search term or category.</p>
+      </div>
+    <% } %>
   <% for(let listing of allListings) { %>
     <div >
       <a href="/listings/<%= listing._id %>" class="listing-card-link">
@@ -29,9 +79,11 @@
             </p>
 
             <p class="listing-price mb-0">
-              &#8377;<%= listing.price.toLocaleString("en-IN") %>
-              <span class="text-muted">/ night</span>
-            </p>
+            &#8377;<span class="price-amount" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span>
+            <span class="text-muted">/ night</span>
+            <br>
+            <small class="tax-note text-muted"></small>
+          </p>
           </div>
         </div>
       </a>

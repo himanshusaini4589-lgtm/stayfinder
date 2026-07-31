@@ -5,14 +5,37 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
-module.exports.index = async (req,res)=>{
-    const allListings = await Listing.find({});
-    res.render("listings/index",{allListings});
-    
-}
 
-module.exports.renderNewForm = async (req,res)=>{
-    res.render("listings/new"); 
+module.exports.index = async (req, res) => {
+    const { category, search } = req.query;
+    let filter = {};
+
+    if (category) {
+        filter.category = category;
+    }
+
+    if (search && search.trim() !== "") {
+        const escapedSearch = escapeRegex(search.trim());
+        const regex = new RegExp(escapedSearch, "i");
+
+        filter.$or = [
+            { title: regex },
+            { location: regex },
+            { country: regex },
+        ];
+    }
+
+    const allListings = await Listing.find(filter);
+    res.render("listings/index", {
+        allListings,
+        category: category || null,
+        search: search || "",
+    });
+};
+
+// Helper — prevents regex injection / ReDoS attacks
+function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 module.exports.showListing = async (req,res)=>{

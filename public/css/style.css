@@ -211,3 +211,57 @@
     height: 400px;
     width: 80vh;
 }
+
+.category-filter {
+  border-bottom: 1px solid #eee;
+  scrollbar-width: none;
+}
+
+.category-filter::-webkit-scrollbar {
+  display: none;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 70px;
+  color: #717171;
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding-bottom: 12px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.category-item i {
+  font-size: 1.2rem;
+}
+
+.category-item:hover {
+  color: #222;
+}
+
+.category-item.active {
+  color: #222;
+  border-bottom-color: #222;
+  font-weight: 600;
+}
+
+
+.price-toggle-label {
+  font-size: 0.85rem;
+  color: #222;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #fe424d;
+  border-color: #fe424d;
+}
+
+.tax-note {
+  font-size: 0.75rem;
+}

@@ -32,9 +32,10 @@
 
                 <p class="mb-2">
                     <strong>Price:</strong>
-                    &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+                    &#8377;<span class="price-amount" data-base-price="<%= listing.price %>"><%= listing.price.toLocaleString("en-IN") %></span> / night
+                    <br>
+                    <small class="tax-note text-muted"></small>
                 </p>
-
                 <p class="mb-2">
                     <strong>Location:</strong>
                     <%= listing.location %>, <%= listing.country %>

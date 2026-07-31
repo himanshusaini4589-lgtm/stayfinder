@@ -24,6 +24,7 @@
           name="search"
           class="search-input"
           placeholder="Search destinations..."
+          value="<%= typeof search !== 'undefined' ? search : '' %>"
         >
       </form>
 
@@ -42,6 +43,16 @@
             <i class="fa-solid fa-circle-user fs-4"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
+              <li class="px-3 py-2">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="priceToggle">
+                  <label class="form-check-label price-toggle-label" for="priceToggle">
+                    Display total before taxes
+                  </label>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+
             <%if(!currUser){ %>
               <li><a class="dropdown-item" href="/signup">Signup</a></li>
               <li><a class="dropdown-item" href="/login">Login</a></li>
