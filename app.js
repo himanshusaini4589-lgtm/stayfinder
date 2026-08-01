@@ -18,12 +18,9 @@ const express = require("express");
  const userRouter = require("./routes/user.js");
  const User = require("./models/user.js");
  const session = require("express-session");
- const MongoStore = require('connect-mongo');
- console.log("MongoStore =", MongoStore);
+ const {MongoStore} = require('connect-mongo');
 
-console.log("Keys =", Object.keys(MongoStore));
-
-process.exit(0);
+ 
 
  const flash = require("connect-flash");
 
