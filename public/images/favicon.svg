@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#FF385C"/>
+
+  <!-- House roof -->
+  <path d="M50 22 L78 46 L70 46 L70 74 L30 74 L30 46 L22 46 Z" fill="#FFFFFF"/>
+
+  <!-- Door -->
+  <rect x="44" y="58" width="12" height="16" rx="1.5" fill="#FF385C"/>
+
+  <!-- Location pin dot (stay-finding cue) -->
+  <circle cx="50" cy="38" r="4" fill="#FF385C"/>
+</svg>

@@ -9,7 +9,7 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/stayfinder";
+const MONGO_URL = process.env.ATLASDB_URL;
 
 main()
 .then(()=>{
@@ -32,7 +32,7 @@ const initDB = async () => {
             .send();
 
         obj.geometry = response.body.features[0].geometry;
-        obj.owner = "6a66f7ecb38d1d60932515ef";
+        obj.owner = "6a6d92f6fab0207959640ceb";
     }
 
     await Listing.insertMany(initData.data);
