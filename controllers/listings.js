@@ -53,6 +53,10 @@ module.exports.showListing = async (req,res)=>{
     res.render("listings/show",{listing,mapToken: process.env.MAP_TOKEN});
 }
 
+module.exports.renderNewForm = (req, res) => {
+    res.render("listings/new.ejs");
+};
+
 module.exports.createNewListing = async (req,res,next)=>{
     //let {title ,description ,image,price,country,location} = req.body;
     if (!req.file) {

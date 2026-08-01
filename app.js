@@ -10,7 +10,7 @@ const express = require("express");
  const methodOverride = require("method-override");
  const ExpressError = require("./utils/ExpressError.js")
 
- const port = 8080;
+ const port = process.env.PORT || 8080;
  const dburl = process.env.ATLASDB_URL;
 
  const listingRouter = require("./routes/listing.js");
