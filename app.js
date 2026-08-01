@@ -19,6 +19,11 @@ const express = require("express");
  const User = require("./models/user.js");
  const session = require("express-session");
  const MongoStore = require('connect-mongo');
+ console.log("MongoStore =", MongoStore);
+
+console.log("Keys =", Object.keys(MongoStore));
+
+process.exit(0);
 
  const flash = require("connect-flash");
 
