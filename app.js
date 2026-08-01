@@ -27,7 +27,6 @@ const express = require("express");
  const passport = require("passport");
  const LocalStrategy = require("passport-local");
 
-console.log(process.env.ATLASDB_URL);
 main()
 .then(()=>{
     console.log("connection to DB");
@@ -72,7 +71,7 @@ const sessionOptions = {
 }
 
 app.get("/",(req,res)=>{
-    res.send("hi,I am Root");
+    res.redirect("/listings");
 })
 
 app.use(session(sessionOptions));
